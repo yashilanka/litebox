@@ -171,17 +171,6 @@
 							$this.liteboxError();
 							$loader.remove();
 						});
-
-						/*$img.one('load', function() {
-							$this.transitionContent('image', $currentContent, $img);
-						}).each(function() {
-							if ($(this).complete)
-								$(this).load();
-								$loader.remove();
-						}).error(function() {
-							$this.liteboxError();
-							$loader.remove();
-						});*/
 					} else if (videoURL = href.match(/(youtube|youtu|vimeo|dailymotion|kickstarter)\.(com|be)\/((watch\?v=([-\w]+))|(video\/([-\w]+))|(projects\/([-\w]+)\/([-\w]+))|([-\w]+))/)) {
 						var src = '';
 
