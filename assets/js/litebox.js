@@ -1,4 +1,4 @@
-//	LiteBox v1.0, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	LiteBox v1.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	===============================================================================
 
 	;(function($, window, document, undefined) {
@@ -34,6 +34,17 @@
 
 		function winHeight() { return window.innerHeight ? window.innerHeight : $(window).height(); }
 
+		function preloadImageArray(images) {
+			$(images).each(function () {
+				var image = new Image(); 
+
+				image.src = this;
+
+				if (image.width > 0)
+					$('<img />').attr('src', this).addClass('litebox-preload').appendTo('body').hide();
+			});
+		}
+
 		liteBox.prototype = {
 			init: function() {
 				// Variables
@@ -46,6 +57,10 @@
 					});
 
 				// Interaction
+					keyEsc = 27,
+					keyLeft = 37,
+					keyRight = 39;
+
 					$('body').off('keyup').on('keyup', function(e) {
 						if ($this.options.escKey && e.keyCode == keyEsc)
 							$this.closeLitebox();
@@ -86,26 +101,33 @@
 						$this.closeLitebox();
 					});
 
+				// Groups
 					if (this.$element.attr('data-litebox-group')) {
 						var	$this = this,
-							groupName = $('[data-litebox-group="'+ this.$element.attr('data-litebox-group') +'"]');
+							groupName = this.$element.attr('data-litebox-group'),
+							group = $('[data-litebox-group="' + this.$element.attr('data-litebox-group') + '"]');
 
-							keyEnter = 13,
-							keyEsc = 27,
-							keyLeft = 37,
-							keyRight = 39;
+						var imageArray = [];
+
+						$('[data-litebox-group="' + groupName + '"]').each(function() {
+							var src = $(this).attr('href');
+
+							imageArray.push(src);
+						});
+
+						preloadImageArray(imageArray);
 
 						$('.litebox-nav').show();
 
 						$prevNav.off('click').on('click', function() {
 							$this.options.callbackPrev.call(this);
 
-							var index = groupName.index(link);	
+							var index = group.index(link);	
 
-							link = groupName.eq(index - 1);
+							link = group.eq(index - 1);
 
 							if (!$(link).length)
-								link = groupName.last();
+								link = group.last();
 
 							$this.populateLitebox(link);
 						});
@@ -113,12 +135,12 @@
 						$nextNav.off('click').on('click', function() {
 							$this.options.callbackNext.call(this);
 
-							var index = groupName.index(link);
+							var index = group.index(link);
 
-							link = groupName.eq(index + 1);
+							link = group.eq(index + 1);
 
 							if (!$(link).length)
-								link = groupName.first();
+								link = group.first();
 
 							$this.populateLitebox(link);
 						});
@@ -158,7 +180,7 @@
 					$litebox.append($loader);
 
 				// Process
-					if (href.match(/\.(jpeg|jpg|gif|png|bmp)$/i) !== null) {
+					if (href.match(/\.(jpeg|jpg|gif|png|bmp)/i) !== null) {
 						var $img = $('<img>', { 'src': href, 'class': 'litebox-content' });
 
 						$this.transitionContent('image', $currentContent, $img);
@@ -279,6 +301,7 @@
 					$litebox.fadeOut(this.options.revealSpeed, function() {
 						$('.litebox-nav').hide();
 						$litebox.empty().remove();
+						$('.litebox-preload').remove();
 					});
 
 				// Remove click handlers
