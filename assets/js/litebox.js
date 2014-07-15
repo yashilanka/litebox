@@ -1,4 +1,4 @@
-//	LiteBox v1.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	LiteBox v1.2, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	===============================================================================
 
 	;(function($, window, document, undefined) {
@@ -9,6 +9,12 @@
 				overlayClose: true,
 				escKey: true,
 				navKey: true,
+				closeTip: 'tip-l-fade',
+				closeTipText: 'Close',
+				prevTip: 'tip-t-fade',
+				prevTipText: 'Previous',
+				nextTip: 'tip-t-fade',
+				nextTipText: 'Next',
 				callbackInit: function() {},
 				callbackBeforeOpen: function() {},
 				callbackAfterOpen: function() {},
@@ -155,10 +161,10 @@
 					var $this = this;
 
 					$litebox = $('<div>', { 'class': 'litebox-overlay' }),
-					$close = $('<div>', { 'class': 'litebox-close' }),
+					$close = $('<div>', { 'class': 'litebox-close ' + this.options.closeTip, 'data-tooltip': this.options.closeTipText }),
 					$error = $('<div class="litebox-error"><span>' + this.options.errorMessage + '</span></div>'),
-					$prevNav = $('<div>', { 'class': 'litebox-nav litebox-prev' }),
-					$nextNav = $('<div>', { 'class': 'litebox-nav litebox-next' }),
+					$prevNav = $('<div>', { 'class': 'litebox-nav litebox-prev ' + this.options.prevTip, 'data-tooltip': this.options.prevTipText }),
+					$nextNav = $('<div>', { 'class': 'litebox-nav litebox-next ' + this.options.nextTip, 'data-tooltip': this.options.nextTipText }),
 					$container = $('<div>', { 'class': 'litebox-container' }),
 					$loader = $('<div>', { 'class': 'litebox-loader' });
 
@@ -302,6 +308,10 @@
 						$('.litebox-nav').hide();
 						$litebox.empty().remove();
 						$('.litebox-preload').remove();
+					});
+
+					$('.tipsy').fadeOut(this.options.revealSpeed, function() {
+						$(this).remove();
 					});
 
 				// Remove click handlers

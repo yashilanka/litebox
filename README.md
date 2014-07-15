@@ -1,4 +1,4 @@
-LiteBox v1.1
+LiteBox v1.2
 ============
 
 A versatile, auto detecting content, lightbox/modal window for use with images, embedded content (YouTube, Vimeo, Daily Motion and KickStarter), iframes and inline html.
@@ -117,5 +117,8 @@ http://www.cloud-eight.com
 Credits
 ======
 
-ImagesLoaded, desandro<br />
-http://imagesloaded.desandro.com/
+imagesLoaded, David DeSandro<br />
+https://github.com/desandro/imagesloaded
+
+tipsy, Jason Frame<br />
+https://github.com/jaz303/tipsy

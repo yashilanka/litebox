@@ -1,4 +1,4 @@
-/*	LiteBox v1.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+/*	LiteBox v1.2, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	=============================================================================== */
 
 /*	Table of Contents
@@ -8,6 +8,13 @@
 
 /*	#Default
 //	================================================== */
+
+	.litebox-overlay,
+	.litebox-overlay > * {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
 
 	.litebox-overlay {
 		display: none;
@@ -69,6 +76,11 @@
 		position: absolute;
 		top: 20px;
 		right: 20px;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
 	}
 
 	.litebox-overlay .litebox-close:hover {
@@ -84,6 +96,12 @@
 		opacity: .2;
 		position: absolute;
 		top: 50%;
+		z-index: 9999999;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
 	}
 
 	.litebox-overlay .litebox-nav:hover {
@@ -110,9 +128,7 @@
 		overflow: hidden;
 	}
 
-	.litebox-overlay .litebox-container.litebox-scroll {
-		overflow-y: auto;
-	}
+	.litebox-overlay .litebox-container.litebox-scroll { overflow-y: auto; }
 
 	.litebox-overlay img,
 	.litebox-overlay iframe {
@@ -158,4 +174,8 @@
 		color: #FFF;
 		text-shadow: 1px 1px 0 #000;
 		line-height: normal;
+	}
+
+	@media only screen and (max-width: 479px) {
+		.litebox-overlay .litebox-close { display: none; }
 	}
