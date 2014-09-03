@@ -67,6 +67,16 @@
 		-o-animation: liteboxLoader 1s linear infinite;
 		animation: liteboxLoader 1s linear infinite;
 	}
+	
+	.litebox-text{
+		position: absolute;
+		bottom: 0px;
+		width: 100%;
+		background: rgba(0, 0, 0, 0.39);
+		color: white;
+		padding: 7px 15px;
+		font-size: 15px;
+	}
 
 	.litebox-overlay .litebox-close {
 		width: 40px;
