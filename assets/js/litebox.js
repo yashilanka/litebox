@@ -162,6 +162,7 @@
 
 					$litebox = $('<div>', { 'class': 'litebox-overlay' }),
 					$close = $('<div>', { 'class': 'litebox-close ' + this.options.closeTip, 'data-tooltip': this.options.closeTipText }),
+					$text = $('<div>', { 'class': 'litebox-text' }),
 					$error = $('<div class="litebox-error"><span>' + this.options.errorMessage + '</span></div>'),
 					$prevNav = $('<div>', { 'class': 'litebox-nav litebox-prev ' + this.options.prevTip, 'data-tooltip': this.options.prevTipText }),
 					$nextNav = $('<div>', { 'class': 'litebox-nav litebox-next ' + this.options.nextTip, 'data-tooltip': this.options.nextTipText }),
@@ -171,7 +172,7 @@
 				// Insert into document
 					$('body').prepend($litebox.css({ 'background-color': this.options.background }));
 
-					$litebox.append($close, $prevNav, $nextNav, $container);
+					$litebox.append($close, $text, $prevNav, $nextNav, $container);
 
 					$litebox.fadeIn(this.options.revealSpeed);
 			},
@@ -184,6 +185,15 @@
 
 				// Show loader
 					$litebox.append($loader);
+				
+				// Show image description
+				var $text=link.attr('data-litebox-text');
+				if(typeof $text == "undefined" || $text == "")
+					$('.litebox-text').hide();
+				else{
+					$('.litebox-text').html($text);
+					$('.litebox-text').slideDown();
+				}
 
 				// Process
 					if (href.match(/\.(jpeg|jpg|gif|png|bmp)/i) !== null) {
