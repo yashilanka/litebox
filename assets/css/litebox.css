@@ -1,4 +1,4 @@
-/*	LiteBox v1.2, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+/*	LiteBox v1.3, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	=============================================================================== */
 
 /*	Table of Contents
@@ -68,14 +68,38 @@
 		animation: liteboxLoader 1s linear infinite;
 	}
 	
-	.litebox-text{
-		position: absolute;
-		bottom: 0px;
+	.litebox-overlay .litebox-text {
 		width: 100%;
-		background: rgba(0, 0, 0, 0.39);
-		color: white;
-		padding: 7px 15px;
-		font-size: 15px;
+		padding: 0 15px;
+		background: rgba(0, 0, 0, 0.5);
+		color: #fff;
+		font-size: 12px;
+		line-height: 50px;
+		position: absolute;
+		bottom: 0;
+		z-index: 2;
+
+		-webkit-opacity: 0;
+		-khtml-opacity: 0;
+		-moz-opacity: 0;
+		-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+		filter: alpha(opacity=0);
+		opacity: 0;
+
+		-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+		-o-transition: all .2s ease-in-out;
+		-ms-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+	}
+	
+	.litebox-overlay .litebox-text.active {
+		-webkit-opacity: 1;
+		-khtml-opacity: 1;
+		-moz-opacity: 1;
+		-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+		filter: alpha(opacity=100);
+		opacity: 1;
 	}
 
 	.litebox-overlay .litebox-close {

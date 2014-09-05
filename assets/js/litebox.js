@@ -1,4 +1,4 @@
-//	LiteBox v1.2, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	LiteBox v1.3, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	===============================================================================
 
 	;(function($, window, document, undefined) {
@@ -187,13 +187,15 @@
 					$litebox.append($loader);
 				
 				// Show image description
-				var $text=link.attr('data-litebox-text');
-				if(typeof $text == "undefined" || $text == "")
-					$('.litebox-text').hide();
-				else{
-					$('.litebox-text').html($text);
-					$('.litebox-text').slideDown();
-				}
+					var $text = link.attr('data-litebox-text');
+
+					if (typeof $text == 'undefined' || $text == '') {
+						$('.litebox-text').removeClass('active');
+						$('.litebox-text').html();
+					} else {
+						$('.litebox-text').html($text);
+						$('.litebox-text').addClass('active');
+					}
 
 				// Process
 					if (href.match(/\.(jpeg|jpg|gif|png|bmp)/i) !== null) {

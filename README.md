@@ -1,4 +1,4 @@
-LiteBox v1.2
+LiteBox v1.3
 ============
 
 A versatile, auto detecting content, lightbox/modal window for use with images, embedded content (YouTube, Vimeo, Daily Motion and KickStarter), iframes and inline html.
@@ -49,6 +49,12 @@ You can also create a gallery/group where you can navigate through the content b
 <a href="002.jpg" target="_self" class="litebox" data-litebox-group="group-1"><img src="002-thumb.jpg" alt="Image 002" /></a>
 <a href="003.jpg" target="_self" class="litebox" data-litebox-group="group-1"><img src="003-thumb.jpg" alt="Image 003" /></a>
 <a href="004.jpg" target="_self" class="litebox" data-litebox-group="group-1"><img src="004-thumb.jpg" alt="Image 004" /></a>
+```
+
+To add a text or caption to the overlay, use the `data-litebox-text` attribute.
+
+```
+<a href="001.jpg" target="_self" class="litebox" data-litebox-text="Image 001"><img src="001-thumb.jpg" alt="Image 001" /></a>
 ```
 
 To call the plugin and set options:
