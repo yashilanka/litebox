@@ -216,10 +216,10 @@
 						var src = '';
 
 						if (videoURL[1] == 'youtube')
-							src = 'http://www.youtube.com/v/' + videoURL[5];
+							src = 'http://www.youtube.com/embed/' + videoURL[5];
 						
 						if (videoURL[1] == 'youtu')
-							src = 'http://www.youtube.com/v/' + videoURL[3];
+							src = 'http://www.youtube.com/embed/' + videoURL[3];
 						
 						if (videoURL[1] == 'vimeo')
 							src = 'http://player.vimeo.com/video/' + videoURL[3];
