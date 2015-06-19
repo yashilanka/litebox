@@ -1,4 +1,4 @@
-//	LiteBox v1.3, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	LiteBox v1.3.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	===============================================================================
 
 	;(function($, window, document, undefined) {
@@ -23,6 +23,7 @@
 				callbackError: function() {},
 				callbackPrev: function() {},
 				callbackNext: function() {},
+				callbackAfterShow: function() {},
 				errorMessage: 'Error loading content.'
 			};
 
@@ -276,6 +277,7 @@
 							$loader.remove();
 						});
 					}
+					$this.options.callbackAfterShow.call(this, link);
 			},
 
 			transitionContent: function(type, $currentContent, $newContent) {

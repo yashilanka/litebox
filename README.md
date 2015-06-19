@@ -1,5 +1,5 @@
-LiteBox v1.3
-============
+LiteBox v1.3.1
+==============
 
 A versatile, auto detecting content, lightbox/modal window for use with images, embedded content (YouTube, Vimeo, Daily Motion and KickStarter), iframes and inline html.
 
@@ -74,6 +74,7 @@ $('.litebox').liteBox({
   callbackError: function() {},
   callbackPrev: function() {},
   callbackNext: function() {},
+  callbackAfterShow: function(link) {},
   errorMessage: 'Error loading content.'
 });
 ```
@@ -97,6 +98,7 @@ Options
 | callbackError       | function() {}            | Calls a JavaScript function when the lightbox encounters an error. |
 | callbackPrev        | function() {}            | Calls a JavaScript function when the prev button of the lightbox is triggered. |
 | callbackNext        | function() {}            | Calls a JavaScript function when the next button of the lightbox is triggered. |
+| callbackAfterShow   | function(link) {}        | Calls a JavaScript function when lightbox is show, you can change rendered element. |
 | errorMessage        | 'Error loading content.' | Sets the error message that is displayed upon the plugin encountering an error. |
 
 
