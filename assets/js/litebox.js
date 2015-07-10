@@ -62,22 +62,6 @@
 						$this.openLitebox();
 					});
 
-				// Interaction
-					keyEsc = 27,
-					keyLeft = 37,
-					keyRight = 39;
-
-					$('body').off('keyup').on('keyup', function(e) {
-						if ($this.options.escKey && e.keyCode == keyEsc)
-							$this.closeLitebox();
-
-						if ($this.options.navKey && e.keyCode == keyLeft)
-							$('.litebox-prev').trigger('click');
-
-						if ($this.options.navKey && e.keyCode == keyRight)
-							$('.litebox-next').trigger('click');
-					});
-
 				// Callback
 					this.options.callbackInit.call(this);
 			},
@@ -151,6 +135,29 @@
 							$this.populateLitebox(link);
 						});
 					}
+
+				// Interaction
+					var keyEsc = 27,
+					    keyLeft = 37,
+					    keyRight = 39;
+
+					$('body').on('keydown.litebox', function(e) {
+						
+						if ($this.options.escKey && e.keyCode == keyEsc){
+							e.stopImmediatePropagation();
+							$this.closeLitebox();
+						}
+
+						if ($this.options.navKey && e.keyCode == keyLeft){
+							e.stopImmediatePropagation();
+							$('.litebox-prev').trigger('click');
+						}
+
+						if ($this.options.navKey && e.keyCode == keyRight){
+							e.stopImmediatePropagation();
+							$('.litebox-next').trigger('click');
+						}
+					});
 
 				// After callback
 					this.options.callbackAfterOpen.call(this);
@@ -329,6 +336,9 @@
 				// Remove click handlers
 					$('.litebox-prev').off('click');
 					$('.litebox-next').off('click');
+					
+				// Remove keydown handler
+					$('body').off('.litebox');
 
 				// After callback
 					this.options.callbackAfterClose.call(this);
