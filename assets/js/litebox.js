@@ -170,7 +170,7 @@
 					$loader = $('<div>', { 'class': 'litebox-loader' });
 
 				// Insert into document
-					$('body').prepend($litebox.css({ 'background-color': this.options.background }));
+					$(document.fullscreenElement || document.msFullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.body).prepend($litebox.css({ 'background-color': this.options.background }));
 
 					$litebox.append($close, $text, $prevNav, $nextNav, $container);
 
