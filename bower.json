@@ -1,0 +1,42 @@
+{
+  "name": "litebox",
+  "authors": [
+    "Bledar Muca <b.muca@inera.it>"
+  ],
+  "description": "A versatile, auto detecting content, lightbox/modal window for use with images, embedded content (YouTube, Vimeo, Daily Motion and KickStarter), iframes and inline html.",
+  "main": "assets/js/litebox.js",
+  "keywords": [
+    "A",
+    "versatile",
+    "auto",
+    "detecting",
+    "content",
+    "lightbox/modal",
+    "window",
+    "for",
+    "use",
+    "with",
+    "images",
+    "embedded",
+    "content",
+    "(YouTube",
+    "Vimeo",
+    "Daily",
+    "Motion",
+    "and",
+    "KickStarter)",
+    "iframes",
+    "and",
+    "inline",
+    "html."
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
