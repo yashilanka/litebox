@@ -3,7 +3,7 @@
   "authors": [
     "Bledar Muca <b.muca@inera.it>"
   ],
-  "description": "A versatile, auto detecting content, lightbox/modal window for use with images, embedded content (YouTube, Vimeo, Daily Motion and KickStarter), iframes and inline html.",
+  "description": "A versatile lightbox/modal window.",
   "main": "assets/js/litebox.js",
   "keywords": [
     "A",
