@@ -3,9 +3,6 @@ LiteBox v1.3
 
 A versatile, auto detecting content, lightbox/modal window for use with images, embedded content (YouTube, Vimeo, Daily Motion and KickStarter), iframes and inline html.
 
-**Demo:** http://www.cloud-eight.com/github/litebox/
-
-
 Usage
 =====
 
@@ -111,14 +108,6 @@ Browser Compatibility
   <li>Opera</li>
   <li>Most mobile browsers</li>
 </ul>
-
-
-Author
-======
-
-Joe Mottershaw, Cloud Eight<br />
-http://www.cloud-eight.com
-
 
 Credits
 ======
