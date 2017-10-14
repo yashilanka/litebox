@@ -1,10 +1,7 @@
-LiteBox v1.1
-============
+LiteBox v1.3.2
+==============
 
 A versatile, auto detecting content, lightbox/modal window for use with images, embedded content (YouTube, Vimeo, Daily Motion and KickStarter), iframes and inline html.
-
-**Demo:** http://www.cloud-eight.com/github/litebox/
-
 
 Usage
 =====
@@ -51,6 +48,12 @@ You can also create a gallery/group where you can navigate through the content b
 <a href="004.jpg" target="_self" class="litebox" data-litebox-group="group-1"><img src="004-thumb.jpg" alt="Image 004" /></a>
 ```
 
+To add a text or caption to the overlay, use the `data-litebox-text` attribute.
+
+```
+<a href="001.jpg" target="_self" class="litebox" data-litebox-text="Image 001"><img src="001-thumb.jpg" alt="Image 001" /></a>
+```
+
 To call the plugin and set options:
 
 ```
@@ -68,6 +71,7 @@ $('.litebox').liteBox({
   callbackError: function() {},
   callbackPrev: function() {},
   callbackNext: function() {},
+  callbackAfterShow: function(link) {},
   errorMessage: 'Error loading content.'
 });
 ```
@@ -91,6 +95,7 @@ Options
 | callbackError       | function() {}            | Calls a JavaScript function when the lightbox encounters an error. |
 | callbackPrev        | function() {}            | Calls a JavaScript function when the prev button of the lightbox is triggered. |
 | callbackNext        | function() {}            | Calls a JavaScript function when the next button of the lightbox is triggered. |
+| callbackAfterShow   | function(link) {}        | Calls a JavaScript function when lightbox is show, you can change rendered element. |
 | errorMessage        | 'Error loading content.' | Sets the error message that is displayed upon the plugin encountering an error. |
 
 
@@ -106,16 +111,11 @@ Browser Compatibility
   <li>Most mobile browsers</li>
 </ul>
 
-
-Author
-======
-
-Joe Mottershaw, Cloud Eight<br />
-http://www.cloud-eight.com
-
-
 Credits
 ======
 
-ImagesLoaded, desandro<br />
-http://imagesloaded.desandro.com/
+imagesLoaded, David DeSandro<br />
+https://github.com/desandro/imagesloaded
+
+tipsy, Jason Frame<br />
+https://github.com/jaz303/tipsy

@@ -1,4 +1,4 @@
-/*	LiteBox v1.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+/*	LiteBox v1.3, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	=============================================================================== */
 
 /*	Table of Contents
@@ -8,6 +8,13 @@
 
 /*	#Default
 //	================================================== */
+
+	.litebox-overlay,
+	.litebox-overlay > * {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
 
 	.litebox-overlay {
 		display: none;
@@ -60,6 +67,40 @@
 		-o-animation: liteboxLoader 1s linear infinite;
 		animation: liteboxLoader 1s linear infinite;
 	}
+	
+	.litebox-overlay .litebox-text {
+		width: 100%;
+		padding: 0 15px;
+		background: rgba(0, 0, 0, 0.5);
+		color: #fff;
+		font-size: 12px;
+		line-height: 50px;
+		position: absolute;
+		bottom: 0;
+		z-index: 2;
+
+		-webkit-opacity: 0;
+		-khtml-opacity: 0;
+		-moz-opacity: 0;
+		-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+		filter: alpha(opacity=0);
+		opacity: 0;
+
+		-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+		-o-transition: all .2s ease-in-out;
+		-ms-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+	}
+	
+	.litebox-overlay .litebox-text.active {
+		-webkit-opacity: 1;
+		-khtml-opacity: 1;
+		-moz-opacity: 1;
+		-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+		filter: alpha(opacity=100);
+		opacity: 1;
+	}
 
 	.litebox-overlay .litebox-close {
 		width: 40px;
@@ -69,6 +110,11 @@
 		position: absolute;
 		top: 20px;
 		right: 20px;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
 	}
 
 	.litebox-overlay .litebox-close:hover {
@@ -84,6 +130,12 @@
 		opacity: .2;
 		position: absolute;
 		top: 50%;
+		z-index: 9999999;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
 	}
 
 	.litebox-overlay .litebox-nav:hover {
@@ -110,9 +162,7 @@
 		overflow: hidden;
 	}
 
-	.litebox-overlay .litebox-container.litebox-scroll {
-		overflow-y: auto;
-	}
+	.litebox-overlay .litebox-container.litebox-scroll { overflow-y: auto; }
 
 	.litebox-overlay img,
 	.litebox-overlay iframe {
@@ -158,4 +208,8 @@
 		color: #FFF;
 		text-shadow: 1px 1px 0 #000;
 		line-height: normal;
+	}
+
+	@media only screen and (max-width: 479px) {
+		.litebox-overlay .litebox-close { display: none; }
 	}

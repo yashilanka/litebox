@@ -1,4 +1,4 @@
-//	LiteBox v1.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	LiteBox v1.3.2, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	===============================================================================
 
 	;(function($, window, document, undefined) {
@@ -9,6 +9,12 @@
 				overlayClose: true,
 				escKey: true,
 				navKey: true,
+				closeTip: 'tip-l-fade',
+				closeTipText: 'Close',
+				prevTip: 'tip-t-fade',
+				prevTipText: 'Previous',
+				nextTip: 'tip-t-fade',
+				nextTipText: 'Next',
 				callbackInit: function() {},
 				callbackBeforeOpen: function() {},
 				callbackAfterOpen: function() {},
@@ -17,6 +23,7 @@
 				callbackError: function() {},
 				callbackPrev: function() {},
 				callbackNext: function() {},
+				callbackAfterShow: function() {},
 				errorMessage: 'Error loading content.'
 			};
 
@@ -54,22 +61,6 @@
 					this.$element.on('click', function(e) {
 						e.preventDefault();
 						$this.openLitebox();
-					});
-
-				// Interaction
-					keyEsc = 27,
-					keyLeft = 37,
-					keyRight = 39;
-
-					$('body').off('keyup').on('keyup', function(e) {
-						if ($this.options.escKey && e.keyCode == keyEsc)
-							$this.closeLitebox();
-
-						if ($this.options.navKey && e.keyCode == keyLeft)
-							$('.litebox-prev').trigger('click');
-
-						if ($this.options.navKey && e.keyCode == keyRight)
-							$('.litebox-next').trigger('click');
 					});
 
 				// Callback
@@ -146,6 +137,29 @@
 						});
 					}
 
+				// Interaction
+					var keyEsc = 27,
+					    keyLeft = 37,
+					    keyRight = 39;
+
+					$('body').on('keydown.litebox', function(e) {
+						
+						if ($this.options.escKey && e.keyCode == keyEsc){
+							e.stopImmediatePropagation();
+							$this.closeLitebox();
+						}
+
+						if ($this.options.navKey && e.keyCode == keyLeft){
+							e.stopImmediatePropagation();
+							$('.litebox-prev').trigger('click');
+						}
+
+						if ($this.options.navKey && e.keyCode == keyRight){
+							e.stopImmediatePropagation();
+							$('.litebox-next').trigger('click');
+						}
+					});
+
 				// After callback
 					this.options.callbackAfterOpen.call(this);
 			},
@@ -155,17 +169,18 @@
 					var $this = this;
 
 					$litebox = $('<div>', { 'class': 'litebox-overlay' }),
-					$close = $('<div>', { 'class': 'litebox-close' }),
+					$close = $('<div>', { 'class': 'litebox-close ' + this.options.closeTip, 'data-tooltip': this.options.closeTipText }),
+					$text = $('<div>', { 'class': 'litebox-text' }),
 					$error = $('<div class="litebox-error"><span>' + this.options.errorMessage + '</span></div>'),
-					$prevNav = $('<div>', { 'class': 'litebox-nav litebox-prev' }),
-					$nextNav = $('<div>', { 'class': 'litebox-nav litebox-next' }),
+					$prevNav = $('<div>', { 'class': 'litebox-nav litebox-prev ' + this.options.prevTip, 'data-tooltip': this.options.prevTipText }),
+					$nextNav = $('<div>', { 'class': 'litebox-nav litebox-next ' + this.options.nextTip, 'data-tooltip': this.options.nextTipText }),
 					$container = $('<div>', { 'class': 'litebox-container' }),
 					$loader = $('<div>', { 'class': 'litebox-loader' });
 
 				// Insert into document
-					$('body').prepend($litebox.css({ 'background-color': this.options.background }));
+					$(document.fullscreenElement || document.msFullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.body).prepend($litebox.css({ 'background-color': this.options.background }));
 
-					$litebox.append($close, $prevNav, $nextNav, $container);
+					$litebox.append($close, $text, $prevNav, $nextNav, $container);
 
 					$litebox.fadeIn(this.options.revealSpeed);
 			},
@@ -178,6 +193,17 @@
 
 				// Show loader
 					$litebox.append($loader);
+				
+				// Show image description
+					var $text = link.attr('data-litebox-text');
+
+					if (typeof $text == 'undefined' || $text == '') {
+						$('.litebox-text').removeClass('active');
+						$('.litebox-text').html();
+					} else {
+						$('.litebox-text').html($text);
+						$('.litebox-text').addClass('active');
+					}
 
 				// Process
 					if (href.match(/\.(jpeg|jpg|gif|png|bmp)/i) !== null) {
@@ -189,7 +215,7 @@
 							$loader.remove();
 						});
 
-						$img.error(function() {
+						$img.on('error', function() {
 							$this.liteboxError();
 							$loader.remove();
 						});
@@ -197,10 +223,10 @@
 						var src = '';
 
 						if (videoURL[1] == 'youtube')
-							src = 'http://www.youtube.com/v/' + videoURL[5];
+							src = 'http://www.youtube.com/embed/' + videoURL[5];
 						
 						if (videoURL[1] == 'youtu')
-							src = 'http://www.youtube.com/v/' + videoURL[3];
+							src = 'http://www.youtube.com/embed/' + videoURL[3];
 						
 						if (videoURL[1] == 'vimeo')
 							src = 'http://player.vimeo.com/video/' + videoURL[3];
@@ -258,6 +284,7 @@
 							$loader.remove();
 						});
 					}
+					$this.options.callbackAfterShow.call(this, link);
 			},
 
 			transitionContent: function(type, $currentContent, $newContent) {
@@ -304,9 +331,16 @@
 						$('.litebox-preload').remove();
 					});
 
+					$('.tipsy').fadeOut(this.options.revealSpeed, function() {
+						$(this).remove();
+					});
+
 				// Remove click handlers
 					$('.litebox-prev').off('click');
 					$('.litebox-next').off('click');
+					
+				// Remove keydown handler
+					$('body').off('.litebox');
 
 				// After callback
 					this.options.callbackAfterClose.call(this);
