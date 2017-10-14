@@ -1,4 +1,4 @@
-//	LiteBox v1.3.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	LiteBox v1.3.2, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
 //	===============================================================================
 
 	;(function($, window, document, undefined) {
