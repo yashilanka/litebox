@@ -215,7 +215,7 @@
 							$loader.remove();
 						});
 
-						$img.error(function() {
+						$img.on('error', function() {
 							$this.liteboxError();
 							$loader.remove();
 						});
